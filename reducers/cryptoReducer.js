@@ -10,6 +10,10 @@ const initialState = {
     { name: 'Zcash',price: 14999 },
     { name: 'VertCoin',price: 9999 },
     { name: 'Dogecoin',price: 13 },
+    { name: 'Coin1',price: 133 },
+    { name: 'Coin2',price: 1333 },
+    { name: 'Coin3',price: 13333 },
+    { name: 'Coin4',price: 133333 },
     ],
   cryptos_cart: []
 }
@@ -37,7 +41,6 @@ const cryptoReducer = (state = initialState, action) => {
                 ...state.cryptos_cart.slice(0, index),
                 ...state.cryptos_cart.slice(index + 1)
               ]
-
           }
       default:
           return state

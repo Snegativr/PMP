@@ -43,9 +43,22 @@ class Cryptos extends React.Component {
       <View style={styles.cryptosRow}>
         {cryptos.map((crypto, index) => (
           <View style={styles.cryptoItem} key={index}>
-            <Text>{crypto.name}</Text>
-            <Text>{crypto.price} $</Text>
+            <Text style={styles.cryptoName}>{crypto.name}</Text>
+            <Text style={styles.cryptoPrice}>{crypto.price} $</Text>
             <Button title='Add to Cart' onPress={() => this.addCrypto(crypto)}/>
+          </View>
+        ))}
+      </View>
+    );
+  };
+  renderCryptosCartRow = (cryptos) => {
+    return (
+      <View style={styles.cryptosRow}>
+        {cryptos.map((crypto, index) => (
+          <View style={styles.cryptoItem} key={index}>
+            <Text style={styles.cryptoName}>{crypto.name}</Text>
+            <Text style={styles.cryptoPrice}>{crypto.price} $</Text>
+            <Button title='Remove from Cart' onPress={() => this.removeCrypto(crypto)}/>
           </View>
         ))}
       </View>
@@ -60,23 +73,20 @@ class Cryptos extends React.Component {
       <SafeAreaView style={styles.container}>
         <Text style={styles.title}>Cryptos</Text>
         <ScrollView keyboardShouldPersistTaps="always">
-          {this.renderCryptosRow(cryptos.slice(0, 2))}
-          {this.renderCryptosRow(cryptos.slice(2, 4))}
-          {this.renderCryptosRow(cryptos.slice(4, 6))}
-          {this.renderCryptosRow(cryptos.slice(6, 8))}
+          {this.renderCryptosRow(cryptos.slice(0, 3))}
+          {this.renderCryptosRow(cryptos.slice(3, 6))}
+          {this.renderCryptosRow(cryptos.slice(6, 9))}
+          {this.renderCryptosRow(cryptos.slice(9, 12))}
         </ScrollView>
 
         <View style={styles.separator} />
 
         <Text style={styles.title}>Cryptos Cart</Text>
         <ScrollView keyboardShouldPersistTaps="always">
-          {cryptos_cart.map((crypto, index) => (
-            <View style={styles.cryptoItem} key={index}>
-              <Text>{crypto.name}</Text>
-              <Text>{crypto.price}</Text>
-              <Button title='Remove from Cart' onPress={() => this.removeCrypto(crypto)}/>
-            </View>
-          ))}
+          {this.renderCryptosCartRow(cryptos_cart.slice(0, 3))}
+          {this.renderCryptosCartRow(cryptos_cart.slice(3, 6))}
+          {this.renderCryptosCartRow(cryptos_cart.slice(6, 9))}
+          {this.renderCryptosCartRow(cryptos_cart.slice(9, 12))}
           <Text style={styles.total}>Total cost: {total} $</Text>
         </ScrollView>
       </SafeAreaView>
@@ -88,12 +98,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    backgroundColor: '#fff',
+  },
+  cryptoName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#3498db',
+  },
+  
+  cryptoPrice: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#27ae60',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
-    marginTop: 25,
+    color: '#333',
   },
   cryptosRow: {
     flexDirection: 'row',
@@ -107,16 +129,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     alignItems:'center',
     justifyContent:'center',
+    backgroundColor: '#ecf0f1',
   },
   separator: {
     height: 1,
-    backgroundColor: '#333',
+    backgroundColor: '#ddd',
     marginVertical: 16,
+    marginTopTop: 16,
   },
   total: {
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 16,
+    color: '#e74c3c',
   },
 });
 
